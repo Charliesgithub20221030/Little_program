@@ -1,0 +1,49 @@
+'''
+This program is made for someone who wants to recall his/her chatting memory 
+with someone important to him/her, it looks very simple but has powerful
+magic to people who have deep feeling with their people.
+
+Author: Charlie Lee
+Date : 2018-07-22
+'''
+
+
+import chardet
+    
+def printThem(content,code):
+        
+    from time import sleep
+    from random import choice
+    for i in content:
+        print(i.decode(code))
+        c= choice([0.5,1,1.5])
+        sleep(c)
+
+print('''
+前奏:請先確認你安裝好了Python 3.X版，如果還沒安裝，可以到官方網站下載，很快的
+官方網站:https://www.python.org/
+在裡面找 Download ，Python 3.n (版本可能更新，所以只打 n )      
+有任何問題，歡迎聯絡作者:charliesmail20221030@gmail.com
+
+安裝完就開始吧
+第一步:把line 聊天紀錄一直往上拉到最底(不然不會全部下載)      
+第二步:右上角有三個點(表示設定)，點下去，點「儲存聊天」，然後把檔案放在跟這個程式一樣的地方
+第三步:把你下載好的聊天紀錄檔案名稱複製下來，等等要貼上
+''')
+name=input('把程式放在跟文字檔一樣的地方，在這裡輸入檔案名稱(不要加 txt哦) : ')
+fileName=name+'.txt'
+with open(fileName,'rb') as f:
+    fileLines=f.readlines()
+    
+for i in fileLines:
+    getCode=chardet.detect(i)['encoding']
+    if getCode!=None:
+        code=getCode
+        break
+if code==None:
+    import sys
+    print('Sorry! cannot detect your code.')
+    sys.exit(1)
+            
+printThem(fileLines,code)
+
